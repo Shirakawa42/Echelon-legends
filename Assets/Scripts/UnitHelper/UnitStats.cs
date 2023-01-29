@@ -9,5 +9,9 @@ public class UnitStats : MonoBehaviour
     public int tier;
     public bool onBench;
     public int benchCoord;
-    public int[] boardCoord;
+    public struct BoardCoord {
+        public int x;
+        public int y;
+    }
+    public BoardCoord boardCoord;
 }

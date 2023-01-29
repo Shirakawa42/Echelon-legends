@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 929636350625408945}
   - component: {fileID: 1994719254931495292}
   - component: {fileID: 7451557553961483585}
+  - component: {fileID: 2393447150501567477}
   m_Layer: 0
   m_Name: CubeMan Le Moins Faible
   m_TagString: Untagged
@@ -389,4 +390,15 @@ MonoBehaviour:
   tier: 1
   onBench: 0
   benchCoord: 0
-  boardCoord: 
+--- !u!114 &2393447150501567477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1411042942303535659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b56c1405c3701842b9e4d68108225ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -38,6 +38,11 @@ public static class GameHelper {
             }
         }
 
+        if (SharedGameValues.round == 1) {
+            ShopHelper.buyUnit(players[0], 0);
+            ShopHelper.buyUnit(players[1], 0);
+        }
+
         yield return new WaitForSeconds(5);
 
         Debug.Log("Prepare phase over");

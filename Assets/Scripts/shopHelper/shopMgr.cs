@@ -91,7 +91,7 @@ public static class ShopHelper {
             player.benchUnits[unit.GetComponent<UnitStats>().benchCoord] = null;
             player.unitOnBench--;
         } else {
-            player.boardUnits[unit.GetComponent<UnitStats>().boardCoord[0]][unit.GetComponent<UnitStats>().boardCoord[1]] = null;
+            player.boardUnits[unit.GetComponent<UnitStats>().boardCoord.y][unit.GetComponent<UnitStats>().boardCoord.x] = null;
         }
 
         unit.GetComponent<BasicBehavior>().selfDestroy();
