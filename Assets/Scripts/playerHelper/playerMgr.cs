@@ -17,6 +17,15 @@ public class Player : MonoBehaviour {
     public GameObject shop;
     public GameObject[] benchUnits = new GameObject[SharedGameValues.benchMaxSize];
     public GameObject[][] boardUnits = new GameObject[SharedGameValues.benchMaxSize][];
+    public GameObject camera;
+
+    public void initializeCamera(GameObject prefabCamera) {
+        camera = Instantiate(prefabCamera);
+        camera.gameObject.name = "camera "+id;
+        camera.transform.parent = gameObject.transform;
+        camera.GetComponent<cameraMgr>().healthBar.GetComponent<HealthDisplay>().healthText.text = hp.ToString();
+        camera.GetComponent<cameraMgr>().goldDisplay.GetComponent<GoldDisplay>().goldText.text = gold.ToString();
+    }
 
     public void addGold() {
         int interest = (int)Math.Floor(gold*0.1f);

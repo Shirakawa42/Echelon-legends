@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour {
     public GameObject[] T3Units;
     public GameObject[] T4Units;
     public GameObject[] T5Units;
+    public GameObject Camera;
     public const int playerCount = 2;
     public Player[] players = new Player[playerCount];
 
@@ -58,6 +59,9 @@ public class GameManager : MonoBehaviour {
         UnitHelper.initializeTotalUnits(SharedGameValues.Units, T4Units);
         UnitHelper.initializeTotalUnits(SharedGameValues.Units, T5Units);
         PlayerHelper.initializePlayers(players, playerCount);
+        for (int i = 0; i < playerCount; i++) {
+            players[i].initializeCamera(Camera);
+        }
     }
 
     // FixedUpdate is called 60 times per second.
