@@ -19,6 +19,7 @@ public static class GameHelper {
         if (round >= 10) {
             return true;
         }
+
         return getAlivePlayers(players, playerCount).Count <= 1;
     }
 
@@ -34,8 +35,8 @@ public static class GameHelper {
 
         Debug.Log("Prepare phase over");
 
-        SharedGameValues.phaseStatus = 0;
         SharedGameValues.gamePhase = (int)SharedGameValues.GamePhase.PLAY;
+        SharedGameValues.phaseStatus = 0;
     }
 
     public static IEnumerator startPlayPhase(Player[] players, int playerCount) {
