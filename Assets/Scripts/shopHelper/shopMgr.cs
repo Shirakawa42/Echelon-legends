@@ -4,11 +4,26 @@ using UnityEngine;
 
 public class ShopManager : MonoBehaviour {
     public bool isLocked = false;
-    public int[] shop = new int[SharedGameValues.shopMaxSize];
+    public int[] shop;
 
     public void createNewShop(Player player) {
+        shop = new int[SharedGameValues.shopMaxSize];
+
         for (int i = 0; i < SharedGameValues.shopMaxSize; i++) {
-            shop[i] = ShopHelper.getRandomShopTierForCurrentLevel(player.level);
+            int tier  = ShopHelper.getRandomShopTierForCurrentLevel(player.level) - 1;
+            var unitsTier = SharedGameValues.shopPools[tier];
+
+            int[] range = new int[unitsTier.Count * 29];
+            int rangeLength = 0;
+
+            foreach (var tierUnits in unitsTier) {
+                for (int j = 0; j < tierUnits.Value; j++) {
+                    range[rangeLength] = tierUnits.Key;
+                    rangeLength++;
+                }
+            }
+
+            shop[i] = range[Random.Range(0, rangeLength)];
         }
     }
 
@@ -21,71 +36,49 @@ public class ShopManager : MonoBehaviour {
 }
 
 public static class ShopHelper {
-    static int[] buildIntArray(int tier1, int tier2, int tier3, int tier4, int tier5) {
-        int[] range = new int[tier1 + tier2 + tier3 + tier4 + tier5];
-
-        int i = 0;
-
-        for (;i < tier1; i++) {
-            range[i] = 1;
+    static int getRandomShopTierNumber(int number, int tier1, int tier2, int tier3, int tier4, int tier5) {
+        if (number <= tier1) {
+            return 1;
+        } else if (number <= tier1 + tier2) {
+            return 2;
+        } else if (number <= tier1 + tier2 + tier3) {
+            return 3;
+        } else if (number <= tier1 + tier2 + tier3 + tier4) {
+            return 4;
+        } else {
+            return 5;
         }
-
-        for (; i < tier2; i++) {
-            range[i] = 2;
-        }
-
-        for (; i < tier3; i++) {
-            range[i] = 3;
-        }
-
-        for (; i < tier4; i++) {
-            range[i] = 4;
-        }
-
-        for (; i < tier5; i++) {
-            range[i] = 5;
-        }
-
-        return range;
     }
+
     public static int getRandomShopTierForCurrentLevel(int level) {
         if (level <= 2) {
             return 1;
         }
 
-        int[] range;
+        int number = Random.Range(1, 101);
         
         switch (level) {
             case 3:
-                range = new int[] {1, 1, 1, 2};
-                break;
+                return getRandomShopTierNumber(number, 75, 25, 0, 0, 0);
             case 4:
-                range = buildIntArray(55, 30, 15, 0, 0);
-                break;
+                return getRandomShopTierNumber(number, 55, 30, 15, 0, 0);
             case 5:
-                range = buildIntArray(45, 33, 20, 2, 0);
-                break;
+                return getRandomShopTierNumber(number, 45, 33, 20, 2, 0);
             case 6:
-                range = buildIntArray(25, 40, 30, 5, 0);
-                break;
+                return getRandomShopTierNumber(number, 25, 40, 30, 5, 0);
             case 7:
-                range = buildIntArray(19, 30, 35, 15, 1);
-                break;
+                return getRandomShopTierNumber(number, 19, 30, 35, 15, 1);
             case 8:
-                range = buildIntArray(16, 20, 35, 25, 4);
-                break;
+                return getRandomShopTierNumber(number, 16, 20, 35, 25, 4);
             default:
-                range = buildIntArray(9, 15, 30, 30, 16);
-                break;
+                return getRandomShopTierNumber(number, 9, 15, 30, 30, 16);
         };
-
-        return range[Random.Range(0, range.Length)];
     }
     public static void initializeShopPools(Dictionary<int,int>[] shopPools, GameObject[] units, int tier, int poolSize) {
         shopPools[tier] = new Dictionary<int,int>();
 
         for (int i = 0; i < units.Length; i++) {
-            shopPools[tier][units[i].GetComponent<BasicBehavior>().id] = poolSize;
+            shopPools[tier][units[i].GetComponent<UnitStats>().id] = poolSize;
         }
     }
 

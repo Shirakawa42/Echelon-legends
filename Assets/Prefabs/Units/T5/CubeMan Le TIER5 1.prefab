@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 1994719254931495292}
   - component: {fileID: 7451557553961483585}
   m_Layer: 0
-  m_Name: CubeMan Le Faible 1
+  m_Name: CubeMan Le TIER5 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -384,9 +384,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a81a21368b957b74a89370644ac7034d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
-  price: 1
-  tier: 1
+  id: 8
+  price: 5
+  tier: 5
   onBench: 0
   benchCoord: 0
   boardCoord: 
