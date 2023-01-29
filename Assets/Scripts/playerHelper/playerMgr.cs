@@ -19,8 +19,10 @@ public class Player : MonoBehaviour {
         canva = Instantiate(Camera);
         canva.gameObject.name = "camera "+id;
         canva.transform.SetParent(gameObject.transform);
-        canva.GetComponent<cameraMgr>().healthBar.GetComponent<HealthDisplay>().healthText.text = hp.ToString();
+        canva.GetComponent<cameraMgr>().health.GetComponent<HealthDisplay>().healthText.text = hp.ToString();
         canva.GetComponent<cameraMgr>().goldDisplay.GetComponent<GoldDisplay>().goldText.text = gold.ToString();
+        canva.GetComponent<cameraMgr>().healthBar.GetComponent<HealthBar>().slider.value = hp;
+        canva.GetComponent<cameraMgr>().healthBar.GetComponent<HealthBar>().slider.maxValue = hp;
     }
 
     public void addGold() {
@@ -42,6 +44,8 @@ public class Player : MonoBehaviour {
         } else if (absStreak >= 5) {
             gold += 3;
         }
+
+        canva.GetComponent<cameraMgr>().goldDisplay.GetComponent<GoldDisplay>().goldText.text = gold.ToString();
     }
 
     public void addXp(int addedXp) {
