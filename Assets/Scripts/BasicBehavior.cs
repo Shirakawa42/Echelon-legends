@@ -5,6 +5,7 @@ using UnityEngine;
 public class BasicBehavior : MonoBehaviour
 {
     public GameObject currentTarget;
+    public int id;
     public float speed = 2.0f;
     public float maxHealth = 100;
     public float currentHealth = 100;

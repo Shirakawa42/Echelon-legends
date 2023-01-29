@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4667050661150551919}
   - component: {fileID: 8982581697967654364}
   - component: {fileID: 929636350625408945}
+  - component: {fileID: 1994719254931495292}
   m_Layer: 0
   m_Name: CubeMan Le Faible
   m_TagString: Untagged
@@ -344,3 +345,28 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!114 &1994719254931495292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1411042942303535659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e65999b36c11cb241863da7bcd5b2d8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentTarget: {fileID: 0}
+  speed: 2
+  maxHealth: 100
+  currentHealth: 100
+  damageMultiplier: 1
+  attackSpeed: 1
+  attackRange: 1
+  rotationSpeed: 1
+  hpRegen: 0.5
+  damageReduction: 1
+  team: 0
+  weapon: {fileID: 0}
+  attackCooldown: 0
