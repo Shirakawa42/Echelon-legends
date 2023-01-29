@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public static class GameHelper {
     public static List<Player> getAlivePlayers(Player[] players, int playerCount) {
@@ -30,6 +31,16 @@ public static class GameHelper {
 
     public static IEnumerator startPreparePhase(Player[] players, int playerCount) {
         Debug.Log("Prepare for combat");
+        
+        for (int i = 0; i < playerCount; i++) {
+            if (!players[i].shop.GetComponent<ShopManager>().isLocked) {
+                players[i].shop.GetComponent<ShopManager>().createNewShop(players[i]);
+            }
+        }
+
+        if (SharedGameValues.round == 1) {
+            ShopHelper.buyUnit(players[0], 0);
+        }
 
         yield return new WaitForSeconds(5);
 
@@ -46,7 +57,35 @@ public static class GameHelper {
 
         Debug.Log("Combat ended");
 
+
+        if (SharedGameValues.round <= 5) {
+            updateBaseIncome();
+        }
+        
+        for (int i = 0; i < playerCount; i++) {
+            players[i].addXp(2);
+            players[i].addGold();
+        }
+
         SharedGameValues.gamePhase = (int)SharedGameValues.GamePhase.PREPARE;
         SharedGameValues.phaseStatus = 0;
+
+        SharedGameValues.round++;
+    }
+
+    public static void updateBaseIncome() {
+        SharedGameValues.baseIncome = 0;
+
+        if (SharedGameValues.round == 1) {
+            SharedGameValues.baseIncome = 2;
+        } else if (SharedGameValues.round == 2) {
+            SharedGameValues.baseIncome = 2;
+        } else if (SharedGameValues.round == 3) {
+            SharedGameValues.baseIncome = 3;
+        } else if (SharedGameValues.round == 4) {
+            SharedGameValues.baseIncome = 4;
+        } else if (SharedGameValues.round >= 5) {
+            SharedGameValues.baseIncome = 5;
+        }
     }
 }

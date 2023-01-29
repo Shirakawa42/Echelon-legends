@@ -95,6 +95,14 @@ public class BasicBehavior : MonoBehaviour
             GetComponent<Renderer>().material.color = Color.blue;
     }
 
+    public void selfDestroy() {
+        Destroy(gameObject);
+    }
+
+    public GameObject selfInstanciate() {
+        return Instantiate(gameObject);
+    }
+
     void Start() {
         ChangeColor();
     }

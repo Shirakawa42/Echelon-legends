@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 1994719254931495292}
   - component: {fileID: 7451557553961483585}
   m_Layer: 0
-  m_Name: CubeMan Le Faible
+  m_Name: CubeMan Le Faible 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -2,17 +2,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public static class SharedGameValues {
-    public static float currentTime = 0f;
+    public static int shopMaxSize = 5;
+    public static int shopRefreshCost = 2;
+    public static int buyXpCost = 4;
+    public static int buyXpAmountGiven = 4;
     public static int benchMaxSize = 8;
     public static int round;
     public static int phaseStatus = 0;
     public static int gamePhase;
+    public static int baseIncome;
     public enum GamePhase {
         PREPARE,
         PLAY,
         END
     }
 
+    public static int levelMax = 10;
+    public static Dictionary<int,int> xpPerLevel = new Dictionary<int, int>();
     public static Dictionary<int,GameObject> Units = new Dictionary<int,GameObject>();
     public static Dictionary<int,int>[] shopPools = new Dictionary<int,int>[5];
 }
@@ -28,14 +34,24 @@ public class GameManager : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        SharedGameValues.round = 0;
+        SharedGameValues.round = 1;
         SharedGameValues.gamePhase = (int)SharedGameValues.GamePhase.PREPARE;
 
-        ShopHelper.initializeShopPools(SharedGameValues.shopPools, T1Units, 0);
-        ShopHelper.initializeShopPools(SharedGameValues.shopPools, T2Units, 1);
-        ShopHelper.initializeShopPools(SharedGameValues.shopPools, T3Units, 2);
-        ShopHelper.initializeShopPools(SharedGameValues.shopPools, T4Units, 3);
-        ShopHelper.initializeShopPools(SharedGameValues.shopPools, T5Units, 4);
+        SharedGameValues.xpPerLevel[0] = 2;
+        SharedGameValues.xpPerLevel[1] = 2;
+        SharedGameValues.xpPerLevel[2] = 6;
+        SharedGameValues.xpPerLevel[3] = 10;
+        SharedGameValues.xpPerLevel[4] = 20;
+        SharedGameValues.xpPerLevel[5] = 36;
+        SharedGameValues.xpPerLevel[6] = 56;
+        SharedGameValues.xpPerLevel[7] = 80;
+        SharedGameValues.xpPerLevel[8] = 100;
+
+        ShopHelper.initializeShopPools(SharedGameValues.shopPools, T1Units, 0, 29);
+        ShopHelper.initializeShopPools(SharedGameValues.shopPools, T2Units, 1, 22);
+        ShopHelper.initializeShopPools(SharedGameValues.shopPools, T3Units, 2, 18);
+        ShopHelper.initializeShopPools(SharedGameValues.shopPools, T4Units, 3, 12);
+        ShopHelper.initializeShopPools(SharedGameValues.shopPools, T5Units, 4, 10);
         UnitHelper.initializeTotalUnits(SharedGameValues.Units, T1Units);
         UnitHelper.initializeTotalUnits(SharedGameValues.Units, T2Units);
         UnitHelper.initializeTotalUnits(SharedGameValues.Units, T3Units);
@@ -74,7 +90,6 @@ public class GameManager : MonoBehaviour {
                     break;
             }
 
-            SharedGameValues.round++;
             Debug.Log("End phase" + SharedGameValues.round);
         }
     

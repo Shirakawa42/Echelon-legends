@@ -7,4 +7,7 @@ public class UnitStats : MonoBehaviour
     public int id;
     public int price;
     public int tier;
+    public bool onBench;
+    public int benchCoord;
+    public int[] boardCoord;
 }

@@ -167,19 +167,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8be706ec2034d7b4298e256b7f7d7a34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  T1Units: []
-  teams:
+  T1Units:
+  - {fileID: 1411042942303535659, guid: f568c598316ce534cb3bf37f9bf044be, type: 3}
+  - {fileID: 1411042942303535659, guid: bea949408784a3e47818b60572bd70ff, type: 3}
+  T2Units:
+  - {fileID: 1411042942303535659, guid: 79f826c3a7ae02144ac98a2abb12012e, type: 3}
+  T3Units: []
+  T4Units: []
+  T5Units: []
+  players:
   - {fileID: 0}
   - {fileID: 0}
-  phaseStatus: 0
-  gamePhase: 0
 --- !u!43 &515431817
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh23916
+  m_Name: pb_Mesh23790
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

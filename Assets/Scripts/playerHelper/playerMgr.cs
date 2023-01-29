@@ -1,18 +1,64 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.Animations;
+using Unity.VisualScripting;
+using System;
+using System.Runtime.CompilerServices;
 
 public class Player : MonoBehaviour {
     public int id;
     public int hp;
     public int streak;
     public int gold;
-    public int currentXp;
+    public int xp;
     public int level;
-    public List<int> currentShop = new List<int>();
-    public List<GameObject> benchUnits = new List<GameObject>();
-    public List<GameObject> fieldUnits = new List<GameObject>();
+    public int unitOnBench;
+    public bool lastRoundWin;
+    public GameObject shop;
+    public GameObject[] benchUnits = new GameObject[SharedGameValues.benchMaxSize];
+    public GameObject[][] boardUnits = new GameObject[SharedGameValues.benchMaxSize][];
 
-    
+    public void addGold() {
+        int interest = (int)Math.Floor(gold*0.1f);
+
+        gold += interest > 5 ? 5 : interest;
+        gold += SharedGameValues.baseIncome;
+
+        if (lastRoundWin) {
+            gold += 1;
+        }
+
+        int absStreak = Math.Abs(streak);
+
+        if (absStreak == 2 || absStreak == 3) {
+            gold += 1;
+        } else if (absStreak == 4) {
+            gold += 2;
+        } else if (absStreak >= 5) {
+            gold += 3;
+        }
+    }
+
+    public void addXp(int addedXp) {
+        if (level >= SharedGameValues.levelMax) {
+            return ;
+        }
+
+        xp += addedXp;
+
+        if (xp >= SharedGameValues.xpPerLevel[level-1]) {
+            xp -= SharedGameValues.xpPerLevel[level-1];
+            level++;
+        }
+    }
+
+    public void buyXp() {
+        if (gold >= SharedGameValues.buyXpCost) {
+            gold -= SharedGameValues.buyXpCost;
+            addXp(SharedGameValues.buyXpAmountGiven);
+        }
+    }
+
     // // Instantiate bench units 
     // var benchUnit = Instantiate(T1Units[0]);
 
@@ -44,8 +90,22 @@ public static class PlayerHelper {
             players[i].hp = 100;
             players[i].gold = 1;
             players[i].streak = 0;
-            players[i].currentXp = 0;
+            players[i].xp = 0;
             players[i].level = 1;
+            players[i].unitOnBench = 0;
+
+            for (int j = 0; j < SharedGameValues.benchMaxSize; j++) {
+                players[i].benchUnits[j] = null;
+                players[i].boardUnits[j] = new GameObject[4];
+                for (int k = 0; k < 4; k++) {
+                    players[i].boardUnits[j][k] = null;
+                }
+            }
+
+            GameObject shopGO = new GameObject("shop" + PlayerName);
+            shopGO.transform.parent = PlayerGO.transform;
+            shopGO.AddComponent<ShopManager>();
+            players[i].shop = shopGO;
         }
     }
 }
