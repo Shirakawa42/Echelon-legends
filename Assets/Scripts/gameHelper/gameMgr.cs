@@ -3,31 +3,31 @@ using System.Collections;
 using System.Collections.Generic;
 
 public static class GameHelper {
-    public static List<Team> getAlivePlayers(Team[] teams, int teamCount) {
-        List<Team> alivePlayers = new List<Team>();
+    public static List<Player> getAlivePlayers(Player[] players, int playerCount) {
+        List<Player> alivePlayers = new List<Player>();
 
-        for (int i = 0; i < teamCount; i++) {
-            if (teams[i].hp > 0) {
-                alivePlayers.Add(teams[i]);
+        for (int i = 0; i < playerCount; i++) {
+            if (players[i].hp > 0) {
+                alivePlayers.Add(players[i]);
             }
         }
 
         return alivePlayers;
     }
 
-    public static bool isEndGame(Team[] teams, int teamCount, int round) {
+    public static bool isEndGame(Player[] players, int playerCount, int round) {
         if (round >= 10) {
             return true;
         }
-        return getAlivePlayers(teams, teamCount).Count <= 1;
+        return getAlivePlayers(players, playerCount).Count <= 1;
     }
 
-    public static void endGame(Team[] teams, int teamCount, int round) {
-        List<Team> alivePlayer = getAlivePlayers(teams, teamCount);
+    public static void endGame(Player[] players, int playerCount, int round) {
+        List<Player> alivePlayer = getAlivePlayers(players, playerCount);
         Debug.Log("Game ended, winner is " + alivePlayer[0].id + ":" + alivePlayer[0].name + " after " + round + " rounds");
     }
 
-    public static IEnumerator startPreparePhase(Team[] teams, int teamCount) {
+    public static IEnumerator startPreparePhase(Player[] players, int playerCount) {
         Debug.Log("Prepare for combat");
 
         yield return new WaitForSeconds(5);
@@ -38,7 +38,7 @@ public static class GameHelper {
         SharedGameValues.gamePhase = (int)SharedGameValues.GamePhase.PLAY;
     }
 
-    public static IEnumerator startPlayPhase(Team[] teams, int teamCount) {
+    public static IEnumerator startPlayPhase(Player[] players, int playerCount) {
         Debug.Log("Combat in progress");
 
         yield return new WaitForSeconds(5);

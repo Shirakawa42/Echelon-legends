@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class Team : MonoBehaviour {
+public class Player : MonoBehaviour {
     public int id;
     public int hp;
     public int streak;
@@ -33,19 +33,19 @@ public class Team : MonoBehaviour {
     // teams[i].fieldUnits.Add(fieldUnit);
 }
 
-public static class TeamHelper {
-    public static void initializeTeams(Team[] teams, int teamCount) {
-        for (int i = 0; i < teamCount; i++) {
-            string teamName = "Team " + (i == 0 ? "Shaman" : "DK");
+public static class PlayerHelper {
+    public static void initializePlayers(Player[] players, int playerCount) {
+        for (int i = 0; i < playerCount; i++) {
+            string PlayerName = "Player " + i.ToString();
 
-            GameObject teamGO = new GameObject(teamName);
-            teams[i] = teamGO.AddComponent<Team>();
-            teams[i].id = i;
-            teams[i].hp = 100;
-            teams[i].gold = 1;
-            teams[i].streak = 0;
-            teams[i].currentXp = 0;
-            teams[i].level = 1;
+            GameObject PlayerGO = new GameObject(PlayerName);
+            players[i] = PlayerGO.AddComponent<Player>();
+            players[i].id = i;
+            players[i].hp = 100;
+            players[i].gold = 1;
+            players[i].streak = 0;
+            players[i].currentXp = 0;
+            players[i].level = 1;
         }
     }
 }

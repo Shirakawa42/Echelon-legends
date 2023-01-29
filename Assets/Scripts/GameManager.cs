@@ -17,8 +17,8 @@ public class GameManager : MonoBehaviour
 {
     public GameObject[] T1Units;
     public Dictionary<int,int> poolT1Units = new Dictionary<int,int>();
-    public const int teamCount = 2;
-    public Team[] teams = new Team[teamCount];
+    public const int playerCount = 2;
+    public Player[] players = new Player[playerCount];
 
     // Start is called before the first frame update
     void Start() {
@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
         SharedGameValues.gamePhase = (int)SharedGameValues.GamePhase.PREPARE;
 
         ShopHelper.createShopPools(T1Units, poolT1Units, 1);
-        TeamHelper.initializeTeams(teams, teamCount);
+        PlayerHelper.initializePlayers(players, playerCount);
     }
 
     // Update is called once per frame
@@ -39,22 +39,22 @@ public class GameManager : MonoBehaviour
                 case (int)SharedGameValues.GamePhase.PREPARE:
                     Debug.Log("Prepare phase");
 
-                    if (GameHelper.isEndGame(teams, teamCount, SharedGameValues.round)) {
+                    if (GameHelper.isEndGame(players, playerCount, SharedGameValues.round)) {
                         SharedGameValues.gamePhase = (int)SharedGameValues.GamePhase.END;
                         SharedGameValues.phaseStatus = 0;
                     } else {
-                        StartCoroutine(GameHelper.startPreparePhase(teams, teamCount));
+                        StartCoroutine(GameHelper.startPreparePhase(players, playerCount));
                     }
                     
                     break;
                 case (int)SharedGameValues.GamePhase.PLAY:
                     Debug.Log("Play phase");
-                    StartCoroutine(GameHelper.startPlayPhase(teams, teamCount));
+                    StartCoroutine(GameHelper.startPlayPhase(players, playerCount));
                     break;
                 case (int)SharedGameValues.GamePhase.END:
                     Debug.Log("End phase");
 
-                    GameHelper.endGame(teams, teamCount, SharedGameValues.round);
+                    GameHelper.endGame(players, playerCount, SharedGameValues.round);
                     // Changer de scène pour tlm et faire un truc de fin
                     break;
             }

@@ -7,4 +7,6 @@ public static class ShopHelper {
             pool[units[i].GetComponent<BasicBehavior>().id] = 20;
         }
     }
+
+    
 }
