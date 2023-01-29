@@ -15,6 +15,13 @@ public class Player : MonoBehaviour {
     public GameObject[][] boardUnits = new GameObject[SharedGameValues.benchMaxSize][];
     public GameObject canva;
 
+    public void updateChampSelectorButtons(int[] shop) {
+        for (int i = 0; i < SharedGameValues.shopMaxSize; i++) {
+            canva.GetComponent<cameraMgr>().champSelector.GetComponent<ChampSelectorManager>().ChampSelectButtons[i].GetComponent<BuyButtonMgr>().unitID = shop[i];
+            // canva.GetComponent<cameraMgr>().champSelector.GetComponent<ChampSelectorManager>().ChampSelectButtons[i].GetComponent<BuyButtonMgr>().updateButton();
+        }
+    }
+
     public void initializeCamera(GameObject Camera) {
         canva = Instantiate(Camera);
         canva.gameObject.name = "camera "+id;

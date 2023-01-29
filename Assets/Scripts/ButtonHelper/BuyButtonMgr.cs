@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class BuyButtonMgr : MonoBehaviour
 {
-    public Button button;
-
+    public int buttonIndex;
+    public int unitID;
     public void OnButtonPress() {
-        Debug.Log("clicked");
+        ShopHelper.buyUnit(gameObject.GetComponentInParent<ChampSelectorManager>().GetComponentInParent<ShopManager>().GetComponentInParent<Player>(), unitID);
     }
 }

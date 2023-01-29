@@ -25,6 +25,8 @@ public class ShopManager : MonoBehaviour {
 
             shop[i] = range[Random.Range(0, rangeLength)];
         }
+
+        player.updateChampSelectorButtons(shop);
     }
 
     public void refreshShop(Player player) {
