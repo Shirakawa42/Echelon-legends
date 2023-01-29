@@ -1,9 +1,5 @@
 using UnityEngine;
-using System.Collections.Generic;
-using UnityEngine.Animations;
-using Unity.VisualScripting;
 using System;
-using System.Runtime.CompilerServices;
 
 public class Player : MonoBehaviour {
     public int id;
@@ -17,14 +13,14 @@ public class Player : MonoBehaviour {
     public GameObject shop;
     public GameObject[] benchUnits = new GameObject[SharedGameValues.benchMaxSize];
     public GameObject[][] boardUnits = new GameObject[SharedGameValues.benchMaxSize][];
-    public GameObject camera;
+    public GameObject canva;
 
-    public void initializeCamera(GameObject prefabCamera) {
-        camera = Instantiate(prefabCamera);
-        camera.gameObject.name = "camera "+id;
-        camera.transform.parent = gameObject.transform;
-        camera.GetComponent<cameraMgr>().healthBar.GetComponent<HealthDisplay>().healthText.text = hp.ToString();
-        camera.GetComponent<cameraMgr>().goldDisplay.GetComponent<GoldDisplay>().goldText.text = gold.ToString();
+    public void initializeCamera(GameObject Camera) {
+        canva = Instantiate(Camera);
+        canva.gameObject.name = "camera "+id;
+        canva.transform.SetParent(gameObject.transform);
+        canva.GetComponent<cameraMgr>().healthBar.GetComponent<HealthDisplay>().healthText.text = hp.ToString();
+        canva.GetComponent<cameraMgr>().goldDisplay.GetComponent<GoldDisplay>().goldText.text = gold.ToString();
     }
 
     public void addGold() {

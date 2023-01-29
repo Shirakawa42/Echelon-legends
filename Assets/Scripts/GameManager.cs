@@ -59,6 +59,7 @@ public class GameManager : MonoBehaviour {
         UnitHelper.initializeTotalUnits(SharedGameValues.Units, T4Units);
         UnitHelper.initializeTotalUnits(SharedGameValues.Units, T5Units);
         PlayerHelper.initializePlayers(players, playerCount);
+
         for (int i = 0; i < playerCount; i++) {
             players[i].initializeCamera(Camera);
         }
