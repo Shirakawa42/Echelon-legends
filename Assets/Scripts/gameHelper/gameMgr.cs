@@ -67,8 +67,8 @@ public static class GameHelper {
         for (int i = 0; i < playerCount; i++) {
             players[i].addXp(2);
             players[i].addGold();
-            players[i].canva.GetComponent<cameraMgr>().healthBar.GetComponent<HealthDisplay>().healthText.text = players[i].hp.ToString();
-            players[i].canva.GetComponent<cameraMgr>().health.GetComponent<HealthBar>().slider.value = players[i].hp;
+            players[i].canva.GetComponent<cameraMgr>().health.GetComponent<HealthDisplay>().healthText.text = players[i].hp.ToString();
+            players[i].canva.GetComponent<cameraMgr>().healthBar.GetComponent<HealthBar>().slider.value = players[i].hp;
         }
 
         SharedGameValues.gamePhase = (int)SharedGameValues.GamePhase.PREPARE;
