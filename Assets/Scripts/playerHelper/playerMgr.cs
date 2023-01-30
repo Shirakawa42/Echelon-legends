@@ -35,12 +35,10 @@ public class Player : MonoBehaviour {
         canva.transform.SetParent(gameObject.transform);
         canva.GetComponent<cameraMgr>().health.GetComponent<HealthDisplay>().healthText.text = hp.ToString();
         canva.GetComponent<cameraMgr>().goldDisplay.GetComponent<GoldDisplay>().goldText.text = gold.ToString();
-        canva.GetComponent<cameraMgr>().healthBar.GetComponent<HealthBar>().slider.value = hp;
-        canva.GetComponent<cameraMgr>().healthBar.GetComponent<HealthBar>().slider.maxValue = hp;
+        canva.GetComponent<cameraMgr>().healthBar.GetComponent<HealthBar>().SetMaxHealth(hp);
 
         for (int i = 0; i < SharedGameValues.shopMaxSize; i++ ) {
             canva.GetComponent<cameraMgr>().champSelector.GetComponent<ChampSelectorManager>().ChampSelectButtons[i].GetComponent<BuyButtonMgr>().player = this;
-            //canva.GetComponent<cameraMgr>().champInfo.GetComponent<ChampSelectorManager>().ChampSelectTextButtons[i].GetComponent<TextButtonMgr>().player = this;
         }
 
         canva.GetComponent<cameraMgr>().refresh.GetComponent<RefreshButtonMgr>().player = this;

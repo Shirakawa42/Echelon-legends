@@ -68,7 +68,7 @@ public static class GameHelper {
             players[i].addXp(2);
             players[i].addRoundGold();
             players[i].canva.GetComponent<cameraMgr>().health.GetComponent<HealthDisplay>().healthText.text = players[i].hp.ToString();
-            players[i].canva.GetComponent<cameraMgr>().healthBar.GetComponent<HealthBar>().slider.value = players[i].hp;
+            players[i].canva.GetComponent<cameraMgr>().healthBar.GetComponent<HealthBar>().SetHealth(players[i].hp);
         }
 
         SharedGameValues.gamePhase = (int)SharedGameValues.GamePhase.PREPARE;
