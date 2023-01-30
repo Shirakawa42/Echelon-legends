@@ -30,9 +30,13 @@ public class Player : MonoBehaviour {
         canva.GetComponent<cameraMgr>().goldDisplay.GetComponent<GoldDisplay>().goldText.text = gold.ToString();
         canva.GetComponent<cameraMgr>().healthBar.GetComponent<HealthBar>().slider.value = hp;
         canva.GetComponent<cameraMgr>().healthBar.GetComponent<HealthBar>().slider.maxValue = hp;
+
+        for (int i = 0; i < 5; i++ ) {
+            canva.GetComponent<cameraMgr>().champSelector.GetComponent<ChampSelectorManager>().ChampSelectButtons[i].GetComponent<BuyButtonMgr>().player = this;
+        }
     }
 
-    public void addGold() {
+    public void addRoundGold() {
         int interest = (int)Math.Floor(gold*0.1f);
 
         gold += interest > 5 ? 5 : interest;
@@ -52,6 +56,16 @@ public class Player : MonoBehaviour {
             gold += 3;
         }
 
+        canva.GetComponent<cameraMgr>().goldDisplay.GetComponent<GoldDisplay>().goldText.text = gold.ToString();
+    }
+
+    public void addGold(int value) {
+        gold += value;
+        canva.GetComponent<cameraMgr>().goldDisplay.GetComponent<GoldDisplay>().goldText.text = gold.ToString();
+    }
+    
+    public void removeGold(int value) {
+        gold -= value;
         canva.GetComponent<cameraMgr>().goldDisplay.GetComponent<GoldDisplay>().goldText.text = gold.ToString();
     }
 

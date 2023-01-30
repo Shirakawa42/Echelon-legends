@@ -38,10 +38,10 @@ public static class GameHelper {
             }
         }
 
-        if (SharedGameValues.round == 1) {
-            ShopHelper.buyUnit(players[0], 0);
-            ShopHelper.buyUnit(players[1], 0);
-        }
+        // if (SharedGameValues.round == 1) {
+        //     ShopHelper.buyUnit(players[0], 0);
+        //     ShopHelper.buyUnit(players[1], 0);
+        // }
 
         yield return new WaitForSeconds(5);
 
@@ -66,7 +66,7 @@ public static class GameHelper {
         
         for (int i = 0; i < playerCount; i++) {
             players[i].addXp(2);
-            players[i].addGold();
+            players[i].addRoundGold();
             players[i].canva.GetComponent<cameraMgr>().health.GetComponent<HealthDisplay>().healthText.text = players[i].hp.ToString();
             players[i].canva.GetComponent<cameraMgr>().healthBar.GetComponent<HealthBar>().slider.value = players[i].hp;
         }

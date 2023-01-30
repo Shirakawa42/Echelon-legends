@@ -31,7 +31,7 @@ public class ShopManager : MonoBehaviour {
 
     public void refreshShop(Player player) {
         if (player.gold >= SharedGameValues.shopRefreshCost) {
-            player.gold -= SharedGameValues.shopRefreshCost;
+            player.removeGold(SharedGameValues.shopRefreshCost);
             createNewShop(player);
         }
     }
@@ -85,7 +85,7 @@ public static class ShopHelper {
     }
 
     public static int sellUnit(Player player, GameObject unit) {
-        player.gold += unit.GetComponent<UnitStats>().price;
+        player.addGold(unit.GetComponent<UnitStats>().price);
 
         SharedGameValues.shopPools[unit.GetComponent<UnitStats>().tier - 1][unit.GetComponent<UnitStats>().id] += 1;
 
@@ -130,7 +130,7 @@ public static class ShopHelper {
             return -1;
         }
 
-        player.gold -= price;
+        player.removeGold(price);
 
         Debug.Log("Bought unit " + unit.GetComponent<UnitStats>().id + " for " + price + " gold");
 
