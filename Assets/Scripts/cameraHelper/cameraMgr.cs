@@ -8,6 +8,7 @@ public class cameraMgr : MonoBehaviour
     public GameObject goldDisplay;
     public GameObject healthBar;
     public GameObject champSelector;
+    public GameObject refresh;
 
     // Start is called before the first frame update
     void Start()

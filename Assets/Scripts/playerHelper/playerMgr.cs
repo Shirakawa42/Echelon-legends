@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 
 public class Player : MonoBehaviour {
@@ -18,7 +19,13 @@ public class Player : MonoBehaviour {
     public void updateChampSelectorButtons(int[] shop) {
         for (int i = 0; i < SharedGameValues.shopMaxSize; i++) {
             canva.GetComponent<cameraMgr>().champSelector.GetComponent<ChampSelectorManager>().ChampSelectButtons[i].GetComponent<BuyButtonMgr>().unitID = shop[i];
-            // canva.GetComponent<cameraMgr>().champSelector.GetComponent<ChampSelectorManager>().ChampSelectButtons[i].GetComponent<BuyButtonMgr>().updateButton();
+            canva.GetComponent<cameraMgr>().champSelector.GetComponent<ChampSelectorManager>().ChampSelectButtons[i].GetComponent<BuyButtonMgr>().button.GetComponentInChildren<Text>().text = SharedGameValues.Units[shop[i]].transform.name;
+        }
+    }
+
+    public void activateChampSelectorButtons(int[] shop){
+        for (int i = 0; i < SharedGameValues.shopMaxSize; i++) {
+            canva.GetComponent<cameraMgr>().champSelector.GetComponent<ChampSelectorManager>().ChampSelectButtons[i].GetComponent<BuyButtonMgr>().button.SetActive(true);
         }
     }
 
@@ -31,9 +38,13 @@ public class Player : MonoBehaviour {
         canva.GetComponent<cameraMgr>().healthBar.GetComponent<HealthBar>().slider.value = hp;
         canva.GetComponent<cameraMgr>().healthBar.GetComponent<HealthBar>().slider.maxValue = hp;
 
-        for (int i = 0; i < 5; i++ ) {
+        for (int i = 0; i < SharedGameValues.shopMaxSize; i++ ) {
             canva.GetComponent<cameraMgr>().champSelector.GetComponent<ChampSelectorManager>().ChampSelectButtons[i].GetComponent<BuyButtonMgr>().player = this;
+            //canva.GetComponent<cameraMgr>().champInfo.GetComponent<ChampSelectorManager>().ChampSelectTextButtons[i].GetComponent<TextButtonMgr>().player = this;
         }
+
+        canva.GetComponent<cameraMgr>().refresh.GetComponent<RefreshButtonMgr>().player = this;
+        
     }
 
     public void addRoundGold() {

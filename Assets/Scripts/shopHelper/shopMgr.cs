@@ -27,6 +27,7 @@ public class ShopManager : MonoBehaviour {
         }
 
         player.updateChampSelectorButtons(shop);
+        player.activateChampSelectorButtons(shop);
     }
 
     public void refreshShop(Player player) {
