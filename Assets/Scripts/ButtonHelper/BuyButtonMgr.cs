@@ -11,6 +11,11 @@ public class BuyButtonMgr : MonoBehaviour
     public int unitID;
     public Player player;
     public void OnButtonPress() {
-        ShopHelper.buyUnit(player, unitID);
+        if (unitID >= 0) {
+            if (ShopHelper.buyUnit(player, unitID) != -1) {
+                player.GetComponent<Player>().shop.GetComponent<ShopManager>().shop[buttonIndex] = -1;
+                unitID = -1;
+            }
+        }
     }
 }
