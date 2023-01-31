@@ -29,9 +29,9 @@ public class Player : MonoBehaviour {
         }
     }
 
-    public void initializeCamera(GameObject Camera) {
-        canva = Instantiate(Camera);
-        canva.gameObject.name = "camera "+id;
+    public void initializeCanvas(GameObject canvas) {
+        canva = Instantiate(canvas);
+        canva.gameObject.name = "canvas "+id;
         canva.transform.SetParent(gameObject.transform);
         canva.GetComponent<cameraMgr>().health.GetComponent<HealthDisplay>().healthText.text = hp.ToString();
         canva.GetComponent<cameraMgr>().goldDisplay.GetComponent<GoldDisplay>().goldText.text = gold.ToString();
@@ -119,7 +119,7 @@ public class Player : MonoBehaviour {
 }
 
 public static class PlayerHelper {
-    public static void initializePlayers(Player[] players, int playerCount) {
+    public static void initializePlayers(Player[] players, int playerCount, GameObject canvas) {
         for (int i = 0; i < playerCount; i++) {
             string PlayerName = "Player " + i.ToString();
 
@@ -145,6 +145,8 @@ public static class PlayerHelper {
             shopGO.transform.parent = PlayerGO.transform;
             shopGO.AddComponent<ShopManager>();
             players[i].shop = shopGO;
+
+            players[i].initializeCanvas(canvas);
         }
     }
 }

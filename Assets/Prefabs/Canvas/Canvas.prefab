@@ -965,7 +965,7 @@ MonoBehaviour:
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
   fill: {fileID: 3355126835477217196}
-  damagedBar: {fileID: 0}
+  damagedBar: {fileID: 2557483218406692338}
   damagedColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &3355126836277796650
 GameObject:

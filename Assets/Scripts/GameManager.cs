@@ -24,12 +24,12 @@ public static class SharedGameValues {
 }
 
 public class GameManager : MonoBehaviour {
-    public GameObject[] T1Units;
-    public GameObject[] T2Units;
-    public GameObject[] T3Units;
-    public GameObject[] T4Units;
-    public GameObject[] T5Units;
-    public GameObject Camera;
+    public GameObject[] t1Units;
+    public GameObject[] t2Units;
+    public GameObject[] t3Units;
+    public GameObject[] t4Units;
+    public GameObject[] t5Units;
+    public GameObject canvas;
     public const int playerCount = 2;
     public Player[] players = new Player[playerCount];
 
@@ -48,21 +48,17 @@ public class GameManager : MonoBehaviour {
         SharedGameValues.xpPerLevel[7] = 80;
         SharedGameValues.xpPerLevel[8] = 100;
 
-        ShopHelper.initializeShopPools(SharedGameValues.shopPools, T1Units, 0, 29);
-        ShopHelper.initializeShopPools(SharedGameValues.shopPools, T2Units, 1, 22);
-        ShopHelper.initializeShopPools(SharedGameValues.shopPools, T3Units, 2, 18);
-        ShopHelper.initializeShopPools(SharedGameValues.shopPools, T4Units, 3, 12);
-        ShopHelper.initializeShopPools(SharedGameValues.shopPools, T5Units, 4, 10);
-        UnitHelper.initializeTotalUnits(SharedGameValues.Units, T1Units);
-        UnitHelper.initializeTotalUnits(SharedGameValues.Units, T2Units);
-        UnitHelper.initializeTotalUnits(SharedGameValues.Units, T3Units);
-        UnitHelper.initializeTotalUnits(SharedGameValues.Units, T4Units);
-        UnitHelper.initializeTotalUnits(SharedGameValues.Units, T5Units);
-        PlayerHelper.initializePlayers(players, playerCount);
-
-        for (int i = 0; i < playerCount; i++) {
-            players[i].initializeCamera(Camera);
-        }
+        ShopHelper.initializeShopPools(SharedGameValues.shopPools, t1Units, 0, 29);
+        ShopHelper.initializeShopPools(SharedGameValues.shopPools, t2Units, 1, 22);
+        ShopHelper.initializeShopPools(SharedGameValues.shopPools, t3Units, 2, 18);
+        ShopHelper.initializeShopPools(SharedGameValues.shopPools, t4Units, 3, 12);
+        ShopHelper.initializeShopPools(SharedGameValues.shopPools, t5Units, 4, 10);
+        UnitHelper.initializeTotalUnits(SharedGameValues.Units, t1Units);
+        UnitHelper.initializeTotalUnits(SharedGameValues.Units, t2Units);
+        UnitHelper.initializeTotalUnits(SharedGameValues.Units, t3Units);
+        UnitHelper.initializeTotalUnits(SharedGameValues.Units, t4Units);
+        UnitHelper.initializeTotalUnits(SharedGameValues.Units, t5Units);
+        PlayerHelper.initializePlayers(players, playerCount, canvas);
     }
 
     // FixedUpdate is called 60 times per second.
