@@ -16,9 +16,9 @@ GameObject:
   - component: {fileID: 929636350625408945}
   - component: {fileID: 1994719254931495292}
   - component: {fileID: 7451557553961483585}
-  - component: {fileID: 3902164860074627388}
+  - component: {fileID: 2393447150501567477}
   m_Layer: 0
-  m_Name: CubeMan Le Faible 1
+  m_Name: CubeMan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -385,12 +385,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a81a21368b957b74a89370644ac7034d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
+  id: 1
   price: 1
   tier: 1
   onBench: 0
   benchCoord: 0
---- !u!114 &3902164860074627388
+--- !u!114 &2393447150501567477
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

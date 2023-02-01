@@ -128,6 +128,7 @@ public static class ShopHelper {
                 player.benchUnits[i].transform.parent = player.transform;
                 player.benchUnits[i].GetComponent<UnitStats>().onBench = true;
                 player.benchUnits[i].GetComponent<UnitStats>().benchCoord = i;
+                player.benchUnits[i].GetComponent<BasicBehavior>().team = player.id;
                 player.GetComponent<Player>().map.GetComponent<MapMgr>().addUnitOnBench(player.benchUnits[i], i);
                 player.unitOnBench++;
                 assigned = true;

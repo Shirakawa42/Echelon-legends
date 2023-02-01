@@ -228,6 +228,8 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
+  - component: {fileID: 963194229}
+  - component: {fileID: 963194230}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -301,6 +303,38 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 43.627, y: 0, z: 0}
+--- !u!114 &963194229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56666c5a40171f54783dd416a44f42bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_MaxRayIntersections: 0
+--- !u!114 &963194230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c49b4cc203aa6414fae5c798d1d0e7d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_MaxRayIntersections: 0
 --- !u!1 &1802448608
 GameObject:
   m_ObjectHideFlags: 0
@@ -401,7 +435,7 @@ MonoBehaviour:
   map: {fileID: 5068792592665924981, guid: cb04f24b6b053a84e8c1cd90100d70b2, type: 3}
   canvas: {fileID: 3355126835922008518, guid: 9bd541b8e4e1fbe44a5b745ebecce8a1, type: 3}
   t1Units:
-  - {fileID: 1411042942303535659, guid: f568c598316ce534cb3bf37f9bf044be, type: 3}
+  - {fileID: 1411042942303535659, guid: fac4b6d6a1a48d743ac82d9594d9854f, type: 3}
   - {fileID: 1411042942303535659, guid: bea949408784a3e47818b60572bd70ff, type: 3}
   t2Units:
   - {fileID: 1411042942303535659, guid: 19e0b45ef1e63e94383d259eb93d6c64, type: 3}

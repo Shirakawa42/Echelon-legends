@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 1994719254931495292}
   - component: {fileID: 7451557553961483585}
   - component: {fileID: 6561988290115859179}
+  - component: {fileID: -6465527567992757169}
   m_Layer: 0
   m_Name: CubeMan Le TIER2 1
   m_TagString: Untagged
@@ -400,5 +401,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b56c1405c3701842b9e4d68108225ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-6465527567992757169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1411042942303535659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a05c865c0233024e971746735965802, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

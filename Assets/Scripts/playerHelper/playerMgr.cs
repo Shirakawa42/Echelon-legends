@@ -165,6 +165,8 @@ public static class PlayerHelper {
             players[i].initializeMap(map);
             players[i].initializeShop(players[i], playerName);
             players[i].initializeCanvas(canvas);
+
+            PlayerGO.transform.position = new Vector3(i * 20, 0, 0);
         }
     }
 }

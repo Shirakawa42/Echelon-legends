@@ -9,7 +9,7 @@ public class UnitManager : MonoBehaviour {
     private bool isTimeCheckAllowed = true;
     private int leftClickNum = 0;
 
-    void OnMouseUp() {
+    private void OnMouseUp() {
         leftClickNum++;
 
         if (leftClickNum == 1 && isTimeCheckAllowed) {
@@ -17,7 +17,6 @@ public class UnitManager : MonoBehaviour {
             StartCoroutine(DetectDoubleLeftClick());
         }
     }
-
     private IEnumerator DetectDoubleLeftClick() {
         isTimeCheckAllowed = false;
         
