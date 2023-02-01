@@ -2,6 +2,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public static class SharedGameValues {
+    public struct FloorScale {
+        public float x;
+        public float y;
+        public float z;
+    }
+
+    public static FloorScale floorScale = new FloorScale {
+        x = 0.132f,
+        y = 1.0f,
+        z = 0.132f
+    };
     public static int shopMaxSize = 5;
     public static int shopRefreshCost = 2;
     public static int buyXpCost = 4;
@@ -24,12 +35,13 @@ public static class SharedGameValues {
 }
 
 public class GameManager : MonoBehaviour {
+    public GameObject map;
+    public GameObject canvas;
     public GameObject[] t1Units;
     public GameObject[] t2Units;
     public GameObject[] t3Units;
     public GameObject[] t4Units;
     public GameObject[] t5Units;
-    public GameObject canvas;
     public const int playerCount = 2;
     public Player[] players = new Player[playerCount];
 
@@ -58,7 +70,7 @@ public class GameManager : MonoBehaviour {
         UnitHelper.initializeTotalUnits(SharedGameValues.Units, t3Units);
         UnitHelper.initializeTotalUnits(SharedGameValues.Units, t4Units);
         UnitHelper.initializeTotalUnits(SharedGameValues.Units, t5Units);
-        PlayerHelper.initializePlayers(players, playerCount, canvas);
+        PlayerHelper.initializePlayers(players, playerCount, canvas, map);
     }
 
     // FixedUpdate is called 60 times per second.
@@ -69,8 +81,6 @@ public class GameManager : MonoBehaviour {
 
             switch (SharedGameValues.gamePhase) {
                 case (int)SharedGameValues.GamePhase.PREPARE:
-                    Debug.Log("Prepare phase");
-
                     if (GameHelper.isEndGame(players, playerCount, SharedGameValues.round)) {
                         SharedGameValues.gamePhase = (int)SharedGameValues.GamePhase.END;
                         SharedGameValues.phaseStatus = 0;
@@ -80,12 +90,9 @@ public class GameManager : MonoBehaviour {
                     
                     break;
                 case (int)SharedGameValues.GamePhase.PLAY:
-                    Debug.Log("Play phase");
                     StartCoroutine(GameHelper.startPlayPhase(players, playerCount));
                     break;
                 case (int)SharedGameValues.GamePhase.END:
-                    Debug.Log("End phase");
-
                     GameHelper.endGame(players, playerCount, SharedGameValues.round);
                     // Changer de scène pour tlm et faire un truc de fin
                     break;

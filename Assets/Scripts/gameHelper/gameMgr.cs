@@ -30,8 +30,6 @@ public static class GameHelper {
     }
 
     public static IEnumerator startPreparePhase(Player[] players, int playerCount) {
-        Debug.Log("Prepare for combat");
-        
         for (int i = 0; i < playerCount; i++) {
             if (!players[i].shop.GetComponent<ShopManager>().isLocked) {
                 players[i].shop.GetComponent<ShopManager>().createNewShop(players[i]);
@@ -45,20 +43,13 @@ public static class GameHelper {
 
         yield return new WaitForSeconds(5);
 
-        Debug.Log("Prepare phase over");
-
         SharedGameValues.gamePhase = (int)SharedGameValues.GamePhase.PLAY;
         SharedGameValues.phaseStatus = 0;
     }
 
     public static IEnumerator startPlayPhase(Player[] players, int playerCount) {
-        Debug.Log("Combat in progress");
-
         players[0].hp -= 5;
         yield return new WaitForSeconds(5);
-
-        Debug.Log("Combat ended");
-
 
         if (SharedGameValues.round <= 5) {
             updateBaseIncome();
@@ -67,8 +58,8 @@ public static class GameHelper {
         for (int i = 0; i < playerCount; i++) {
             players[i].addXp(2);
             players[i].addRoundGold();
-            players[i].canva.GetComponent<cameraMgr>().health.GetComponent<HealthDisplay>().healthText.text = players[i].hp.ToString();
-            players[i].canva.GetComponent<cameraMgr>().healthBar.GetComponent<HealthBar>().SetHealth(players[i].hp);
+            players[i].canva.GetComponent<CameraMgr>().health.GetComponent<HealthDisplay>().healthText.text = players[i].hp.ToString();
+            players[i].canva.GetComponent<CameraMgr>().healthBar.GetComponent<HealthBar>().SetHealth(players[i].hp);
         }
 
         SharedGameValues.gamePhase = (int)SharedGameValues.GamePhase.PREPARE;

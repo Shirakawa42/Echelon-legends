@@ -15,33 +15,49 @@ public class Player : MonoBehaviour {
     public GameObject[] benchUnits = new GameObject[SharedGameValues.benchMaxSize];
     public GameObject[][] boardUnits = new GameObject[SharedGameValues.benchMaxSize][];
     public GameObject canva;
+    public GameObject map;
 
     public void updateChampSelectorButtons(int[] shop) {
         for (int i = 0; i < SharedGameValues.shopMaxSize; i++) {
-            canva.GetComponent<cameraMgr>().champSelector.GetComponent<ChampSelectorManager>().ChampSelectButtons[i].GetComponent<BuyButtonMgr>().unitID = shop[i];
-            canva.GetComponent<cameraMgr>().champSelector.GetComponent<ChampSelectorManager>().ChampSelectButtons[i].GetComponent<BuyButtonMgr>().button.GetComponentInChildren<Text>().text = SharedGameValues.Units[shop[i]].transform.name;
+            canva.GetComponent<CameraMgr>().champSelector.GetComponent<ChampSelectorManager>().ChampSelectButtons[i].GetComponent<BuyButtonMgr>().unitID = shop[i];
+            canva.GetComponent<CameraMgr>().champSelector.GetComponent<ChampSelectorManager>().ChampSelectButtons[i].GetComponent<BuyButtonMgr>().button.GetComponentInChildren<Text>().text = SharedGameValues.Units[shop[i]].transform.name;
         }
     }
 
     public void activateChampSelectorButtons(int[] shop){
         for (int i = 0; i < SharedGameValues.shopMaxSize; i++) {
-            canva.GetComponent<cameraMgr>().champSelector.GetComponent<ChampSelectorManager>().ChampSelectButtons[i].GetComponent<BuyButtonMgr>().button.SetActive(true);
+            canva.GetComponent<CameraMgr>().champSelector.GetComponent<ChampSelectorManager>().ChampSelectButtons[i].GetComponent<BuyButtonMgr>().button.SetActive(true);
         }
+    }
+
+    public void initializeMap(GameObject map) {
+        GameObject mapGO = Instantiate(map);
+        mapGO.transform.parent = this.transform;
+        mapGO.name = "map " + id;
+        mapGO.GetComponent<MapMgr>().floor.transform.localScale = new Vector3(SharedGameValues.floorScale.x * SharedGameValues.benchMaxSize, SharedGameValues.floorScale.y, SharedGameValues.floorScale.z * 10);
+        this.map = map;
+    }
+
+    public void initializeShop(Player player, string playerName) {
+        GameObject shopGO = new GameObject("shop" + playerName);
+        shopGO.transform.parent = this.transform;
+        shopGO.AddComponent<ShopManager>();
+        player.shop = shopGO;
     }
 
     public void initializeCanvas(GameObject canvas) {
         canva = Instantiate(canvas);
-        canva.gameObject.name = "canvas "+id;
+        canva.gameObject.name = "canvas " + id;
         canva.transform.SetParent(gameObject.transform);
-        canva.GetComponent<cameraMgr>().health.GetComponent<HealthDisplay>().healthText.text = hp.ToString();
-        canva.GetComponent<cameraMgr>().goldDisplay.GetComponent<GoldDisplay>().goldText.text = gold.ToString();
-        canva.GetComponent<cameraMgr>().healthBar.GetComponent<HealthBar>().SetMaxHealth(hp);
+        canva.GetComponent<CameraMgr>().health.GetComponent<HealthDisplay>().healthText.text = hp.ToString();
+        canva.GetComponent<CameraMgr>().goldDisplay.GetComponent<GoldDisplay>().goldText.text = gold.ToString();
+        canva.GetComponent<CameraMgr>().healthBar.GetComponent<HealthBar>().SetMaxHealth(hp);
 
         for (int i = 0; i < SharedGameValues.shopMaxSize; i++ ) {
-            canva.GetComponent<cameraMgr>().champSelector.GetComponent<ChampSelectorManager>().ChampSelectButtons[i].GetComponent<BuyButtonMgr>().player = this;
+            canva.GetComponent<CameraMgr>().champSelector.GetComponent<ChampSelectorManager>().ChampSelectButtons[i].GetComponent<BuyButtonMgr>().player = this;
         }
 
-        canva.GetComponent<cameraMgr>().refresh.GetComponent<RefreshButtonMgr>().player = this;
+        canva.GetComponent<CameraMgr>().refresh.GetComponent<RefreshButtonMgr>().player = this;
         
     }
 
@@ -65,17 +81,17 @@ public class Player : MonoBehaviour {
             gold += 3;
         }
 
-        canva.GetComponent<cameraMgr>().goldDisplay.GetComponent<GoldDisplay>().goldText.text = gold.ToString();
+        canva.GetComponent<CameraMgr>().goldDisplay.GetComponent<GoldDisplay>().goldText.text = gold.ToString();
     }
 
     public void addGold(int value) {
         gold += value;
-        canva.GetComponent<cameraMgr>().goldDisplay.GetComponent<GoldDisplay>().goldText.text = gold.ToString();
+        canva.GetComponent<CameraMgr>().goldDisplay.GetComponent<GoldDisplay>().goldText.text = gold.ToString();
     }
     
     public void removeGold(int value) {
         gold -= value;
-        canva.GetComponent<cameraMgr>().goldDisplay.GetComponent<GoldDisplay>().goldText.text = gold.ToString();
+        canva.GetComponent<CameraMgr>().goldDisplay.GetComponent<GoldDisplay>().goldText.text = gold.ToString();
     }
 
     public void addXp(int addedXp) {
@@ -119,11 +135,11 @@ public class Player : MonoBehaviour {
 }
 
 public static class PlayerHelper {
-    public static void initializePlayers(Player[] players, int playerCount, GameObject canvas) {
+    public static void initializePlayers(Player[] players, int playerCount, GameObject canvas, GameObject map) {
         for (int i = 0; i < playerCount; i++) {
-            string PlayerName = "Player " + i.ToString();
+            string playerName = "Player " + i.ToString();
 
-            GameObject PlayerGO = new GameObject(PlayerName);
+            GameObject PlayerGO = new GameObject(playerName);
             players[i] = PlayerGO.AddComponent<Player>();
             players[i].id = i;
             players[i].hp = 100;
@@ -141,11 +157,8 @@ public static class PlayerHelper {
                 }
             }
 
-            GameObject shopGO = new GameObject("shop" + PlayerName);
-            shopGO.transform.parent = PlayerGO.transform;
-            shopGO.AddComponent<ShopManager>();
-            players[i].shop = shopGO;
-
+            players[i].initializeMap(map);
+            players[i].initializeShop(players[i], playerName);
             players[i].initializeCanvas(canvas);
         }
     }

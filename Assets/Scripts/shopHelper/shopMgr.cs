@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Unity.PlasticSCM.Editor.WebApi;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ShopManager : MonoBehaviour {
@@ -88,7 +89,7 @@ public static class ShopHelper {
     public static int sellUnit(Player player, GameObject unit) {
         player.addGold(unit.GetComponent<UnitStats>().price);
 
-        SharedGameValues.shopPools[unit.GetComponent<UnitStats>().tier - 1][unit.GetComponent<UnitStats>().id] += 1;
+        SharedGameValues.shopPools[unit.GetComponent<UnitStats>().tier - 1][unit.GetComponent<UnitStats>().id]++;
 
         if (unit.GetComponent<UnitStats>().onBench) {
             player.benchUnits[unit.GetComponent<UnitStats>().benchCoord] = null;
@@ -116,10 +117,13 @@ public static class ShopHelper {
 
         for (int i = 0; i < SharedGameValues.benchMaxSize; i++) {
             if (player.benchUnits[i] == null) {
+                SharedGameValues.shopPools[unit.GetComponent<UnitStats>().tier - 1][unit.GetComponent<UnitStats>().id]--;
+
                 player.benchUnits[i] = unit.GetComponent<BasicBehavior>().selfInstanciate();
                 player.benchUnits[i].transform.parent = player.transform;
                 player.benchUnits[i].GetComponent<UnitStats>().onBench = true;
                 player.benchUnits[i].GetComponent<UnitStats>().benchCoord = i;
+                player.GetComponent<Player>().map.GetComponent<MapMgr>().addUnitOnBench(player.benchUnits[i], i);
                 player.unitOnBench++;
                 assigned = true;
                 break;
