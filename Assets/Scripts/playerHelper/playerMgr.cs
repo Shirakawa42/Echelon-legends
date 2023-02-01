@@ -42,6 +42,11 @@ public class Player : MonoBehaviour {
         GameObject shopGO = new GameObject("shop" + playerName);
         shopGO.transform.parent = this.transform;
         shopGO.AddComponent<ShopManager>();
+        
+        for (int i = 0; i < SharedGameValues.shopMaxSize; i++) {
+            shopGO.GetComponent<ShopManager>().shop[i] = -1;
+        }
+
         player.shop = shopGO;
     }
 

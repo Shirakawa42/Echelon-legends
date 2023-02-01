@@ -5,12 +5,16 @@ using UnityEngine;
 
 public class ShopManager : MonoBehaviour {
     public bool isLocked = false;
-    public int[] shop;
+    public int[] shop = new int[SharedGameValues.shopMaxSize];
 
     public void createNewShop(Player player) {
-        shop = new int[SharedGameValues.shopMaxSize];
-
         for (int i = 0; i < SharedGameValues.shopMaxSize; i++) {
+            if (shop[i] != -1) {
+                GameObject units = SharedGameValues.Units[shop[i]];
+
+                SharedGameValues.shopPools[units.GetComponent<UnitStats>().tier - 1][shop[i]]++;
+            }
+
             int tier  = ShopHelper.getRandomShopTierForCurrentLevel(player.level) - 1;
             var unitsTier = SharedGameValues.shopPools[tier];
 
@@ -25,6 +29,7 @@ public class ShopManager : MonoBehaviour {
             }
 
             shop[i] = range[Random.Range(0, rangeLength)];
+            SharedGameValues.shopPools[tier][shop[i]]--;
         }
 
         player.updateChampSelectorButtons(shop);
